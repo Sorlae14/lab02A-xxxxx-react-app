@@ -4,9 +4,14 @@ import { useNavigate, useParams } from "@remix-run/react";
 export default function HerbEditForm(){
     const navigate = useNavigate();
     const myParams = useParams();
-    const hbId = myParams._____;
+    const hbId = myParams.hbId ;
     const [hbData, setHerbData] = useState({
-        _____
+        hbId: String,
+        hbName: String,
+        hbDesc: String,
+        hbCate: Number,
+         hbProp: String,
+         hbSupp: String
     });
     const [cateOption, setCateOption] = useState('');
 
@@ -21,18 +26,18 @@ export default function HerbEditForm(){
     useEffect(() => {
         try {
             const fetchHerbData = async () => {
-                const hbData = await fetch(`_____/${_____}`);
+                const hbData = await fetch(`/api/lab02.herbForm${hbId}`);
                 if (hbData.ok) {
                     const hbJson = await hbData.json();
-                    setHerbData(_____);
-                    _____(hbJson.hbCate);
+                    setHerbData(hbJson);
+                    (hbJson.hbCate);
                     console.log(hbJson);
                 } else {
                     alert('[ERR] Failed to loaded data.');
                 }
             }
 
-            _____().catch(console.error);
+            fetchHerbData().catch(console.error);
         } catch (error) {
             alert('[ERR] An error occurred while loading the data.');
         }
@@ -47,12 +52,12 @@ export default function HerbEditForm(){
         console.log(formJson);
         
         try {
-            const resHerb = await fetch('_____', {
+            const resHerb = await fetch('/api/lab02.herbEditForm.$hbId', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: _____.stringify(formJson),
+                body: JSON.stringify(formJson),
             });
     
             if(resHerb.ok){

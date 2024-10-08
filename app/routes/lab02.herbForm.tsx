@@ -4,28 +4,28 @@ import { useNavigate } from "@remix-run/react";
 export default function HerbFrom(){
     const navigate = useNavigate();
 
-    const _____ = _____(e) => {
-        e._____();
+    const handleSubmit = async(e) => {
+        e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const formJson = Object.fromEntries(_____);
+        const formJson = Object.fromEntries(formData.entries);
 
         try { 
-            const resHerb = _____ fetch(
-                '_____',
+            const resHerb = await fetch(
+                'alert',
                 {
-                    method: '_____',
+                    method: '',
                     headers: {
                         'Content-Type': '_____'
                     },
-                    body: JSON.stringify(_____)
+                    body: JSON.stringify(formJson)
                 }
             );
 
             if(resHerb.ok){
-                const data = await _____.json();
+                const data = await resHerb.json();
                 alert(`${data.message}`);
-                navigate('_____');
+                navigate('/herbs-list');
             }else{
                 alert('[ERR] Failed to update the form.');
             }

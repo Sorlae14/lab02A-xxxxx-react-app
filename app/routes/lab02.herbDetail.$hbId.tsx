@@ -3,25 +3,31 @@ import { useNavigate, useParams } from "@remix-run/react";
 
 export default function HerbDetail(){
     const myParams = useParams();
-    const hbId = _____.hbId;
+    const hbId = useNavigate.hbId;
     const [hbData, setHerbData] = useState({
-        _____
+            hbId: String,
+            hbName: String,
+            hbDesc: String,
+            hbCate: Number,
+            hbProp: String,
+            hbSupp: String
+        
     });
 
     useEffect(() => {
         try {
             const fetchHerbData = async () => {
-                const hbData = await fetch(`_____/${_____}`);
+                const hbData = await fetch(`/api/getHerb${hbId}`);
                 if (hbData.ok) {
                     const hbJson = await hbData.json();
-                    _____(hbJson);
+                    setHerbData(hbJson);
                     console.log(hbJson);
                 } else {
                     alert('[ERR] Failed to loaded data.');
                 }
             }
 
-            _____().catch(console.error);
+            setHerbData().catch(console.error);
         } catch (error) {
             alert('[ERR] An error occurred while loading the data.');
         }
@@ -29,10 +35,10 @@ export default function HerbDetail(){
 
     return (
     <div className="m-3">
-        <a href='_____'>[ ข้อมูลสมุนไพร ]</a>
+        <a href='/lab02.herbLists'>[ ข้อมูลสมุนไพร ]</a>
         <h1 className="font-bold">รายละเอียดสมุนไพร</h1>
         {
-            <div key={_____}>
+            <div key={}>
                 <div className="font-bold p-2 m-2 border-2 rounded-lg">
                     ชื่อสมุนไพร: {_____}<br/>
                     รายละเอียด: {_____}<br/>

@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 
 export default function HerbLists(){
     const [loadStatus, setLoadStatus] = useState(true);
-    const [herbData, setHerbData] = useState(_____);
+    const [herbData, setHerbData] = useState(false);
 
     useEffect(()=>{
         try {
-            const _____ = _____() => {
+            const fetchData = async() => {
                 const herb = _____ fetch(
                     '_____'
                 );
                 if(herb.ok){
                     const hbJson = await herb.json();
-                    _____(hbJson);
+                    setHerbData(hbJson);
                 }else{
                     alert('[ERR] Unable to read data.');
                 }
@@ -29,9 +29,9 @@ export default function HerbLists(){
         try {
             const fetchData = async() => {
                 const hbData = await fetch(
-                    `http://_____/${_____}`,
+                    `http://http://localhost:3200//${hbId}`,
                     { 
-                        method: '_____'
+                        method: 'Post'
                     }
                 );
                 if(hbData.ok){
@@ -41,7 +41,7 @@ export default function HerbLists(){
                     alert('[ERR] An error when deleting data.');
                 }
             } 
-            _____();
+            body: JSON.();
             setLoadStatus(true);
         } catch (error) {
             alert('[ERR] An error occurs when deleting the data.');
@@ -50,7 +50,7 @@ export default function HerbLists(){
     
     return (
     <div className="m-3">
-        <a href='_____'>[ เพิ่มข้อมูลสมุนไพร ]</a>
+        <a href='/api/addHerb'>[ เพิ่มข้อมูลสมุนไพร ]</a>
         <h1 className="font-bold">รายการสมุนไพร</h1>
         {
             herbData.map((h_item, index) => 
@@ -63,9 +63,9 @@ export default function HerbLists(){
                     ผู้ผลิต: {_____}<br/>
                 </div>
                 <div className="p-2 m-2">
-                    <a href={`/lab02/herbDetail/${_____}`}>[ รายละเอียด ]</a>
-                    <a href={`/lab02/_____/${h_item.hbId}`}>[ แก้ไข ]</a>
-                    <a href="#" onClick={(e) => _____(`${_____}`)}>[ ลบ ]</a>
+                    <a href={`/lab02/herbDetail/${$hbId}`}>[ รายละเอียด ]</a>
+                    <a href={`/lab02/herbEditForm/${h_item.hbId}`}>[ แก้ไข ]</a>
+                    <a href="#" onClick={(e) => body: JSON.(`${handleDelete}`)}>[ ลบ ]</a>
                 </div>
             </div>
             )
